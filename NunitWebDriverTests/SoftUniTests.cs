@@ -27,7 +27,7 @@ namespace NunitWebDriverTests
         {
             //Act
             driver.Url = "https://softuni.bg";
-            string expectedTitle = "Обучение по програмиране - Софтуерен университет";
+            string expectedTitle = "ГЋГЎГіГ·ГҐГ­ГЁГҐ ГЇГ® ГЇГ°Г®ГЈГ°Г Г¬ГЁГ°Г Г­ГҐ - Г‘Г®ГґГІГіГҐГ°ГҐГ­ ГіГ­ГЁГўГҐГ°Г±ГЁГІГҐГІ";
             
             //Assert
             Assert.AreEqual(expectedTitle, driver.Title);
@@ -41,11 +41,25 @@ namespace NunitWebDriverTests
            
             var ZanasElement = driver.FindElement(By.CssSelector("#header-nav > div.toggle-nav.toggle-holder > ul > li:nth-child(1) > a > span"));
             ZanasElement.Click();
-            string expectedTitle = "За нас - Софтуерен университет";
+            string expectedTitle = "Г‡Г  Г­Г Г± - Г‘Г®ГґГІГіГҐГ°ГҐГ­ ГіГ­ГЁГўГҐГ°Г±ГЁГІГҐГІ";
 
             //Assert
             Assert.AreEqual(expectedTitle, driver.Title);
           
+        }
+        [Test]
+        public void test_Login_InvalidUsernameAndPassword()
+        {
+           
+           //Invalid Login
+            driver.FindElement(By.CssSelector(".softuni-btn-primary")).Click();
+            driver.FindElement(By.Id("username")).Click();
+            driver.FindElement(By.Id("username")).SendKeys("user1");
+            driver.FindElement(By.Id("password-input")).SendKeys("user1");
+            driver.FindElement(By.CssSelector(".softuni-btn")).Click();
+            driver.FindElement(By.CssSelector("li")).Click();
+            Assert.That(driver.FindElement(By.CssSelector("li")).Text, Is.EqualTo("РќРµРІР°Р»РёРґРЅРѕ РїРѕС‚СЂРµР±РёС‚РµР»СЃРєРѕ РёРјРµ РёР»Рё РїР°СЂРѕР»Р°"));
+            driver.Close();
         }
     }
 }
